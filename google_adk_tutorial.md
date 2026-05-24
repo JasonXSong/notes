@@ -677,7 +677,7 @@ class NoopAgent(BaseAgent):
 ```python
 async for event in runner.run_async(
     user_id=user_id,
-    session_id=session.d,
+    session_id=session.id,
     new_message=user_message,
     run_config=run_config,
 ):
@@ -767,8 +767,8 @@ RunConfig(response_modalities=["TEXT"])
 
 ```python
 import asyncio
-import uuid
 import json
+import uuid
 
 from google.adk.runners import Runner, RunConfig
 from google.adk.sessions import InMemorySessionService
@@ -908,7 +908,7 @@ def stop_if_no_items(
     )
 ```
 
-不同 ADK patch 版本对 `LlmResponse.content` 的内部结构可能有差异。如果遇到类型错误，可以改用 `types.GenerateContentResponse` 或 `types.Candidate` 的形式。
+不同 ADK patch 版本对 `LlmResponse.content` 的内部结构可能有差异。如果遇到类型错误，可以改用 `types.GenerateContentResponse` + `types.Candidate` 的形式：
 
 ```python
 return LlmResponse(
